@@ -1,6 +1,8 @@
 import pygame
 import sys
 import pygame_gui
+from morse_code import from_english_to_morse
+
 
 pygame.init()
 
@@ -35,6 +37,8 @@ def main():
         pygame.display.update()
 
 def show_morse(text):
+    morse = from_english_to_morse(text)
+    morse = " ".join(morse)
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -42,7 +46,7 @@ def show_morse(text):
                 sys.exit()
 
         SCREEN.fill("white")
-        morse_code_text = pygame.font.SysFont("bahnschrift", 100).render(f"{text}", True, "black")
+        morse_code_text = pygame.font.SysFont("bahnschrift", 30).render(f"{morse}", True, "black")
         morse_code_text_rect = morse_code_text.get_rect(center = (WIDTH/2, HEIGHT/2))
         SCREEN.blit(morse_code_text, morse_code_text_rect)
 
